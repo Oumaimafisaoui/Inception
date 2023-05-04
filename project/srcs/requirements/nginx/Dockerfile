@@ -1,6 +1,15 @@
 FROM debian:buster
-RUN apt-get update && apt-get install -y nginx
-COPY ./tools/server.crt ./tools/server.key ./conf/nginx.conf /etc/nginx/
+RUN apt-get update && apt-get install -y nginx openssl
+
+RUN openssl req -new -nodes -x509 \
+        -out /etc/nginx/server.crt \
+        -keyout /etc/nginx/server.key \
+        -subj "/C=MA/ST=Beni Mellal - Khenifra/L=Khouribga/O=1337/CN=oufisaou.42.fr"
+
+COPY ./conf/nginx.conf /etc/nginx/
+RUN chown www-data:www-data /etc/nginx/server.*
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html
 
 EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
