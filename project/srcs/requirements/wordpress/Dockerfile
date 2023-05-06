@@ -23,5 +23,6 @@ RUN wget -q http://wordpress.org/latest.tar.gz && \
 COPY ./conf/wp-config-create.sh  .
 RUN  chmod -R 0777 wp-content && sh wp-config-create.sh 
 EXPOSE 80
-CMD tail -f
 
+# create aphp folder and give it root in var
+CMD ["/usr/sbin/php-fpm7.3", "-F"]

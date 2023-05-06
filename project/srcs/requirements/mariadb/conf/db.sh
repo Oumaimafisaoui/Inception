@@ -1,4 +1,4 @@
-#!bin/sh
+#!/bin/sh
 cd /etc/mysql/mariadb.conf.d/;
 sed -i "s/127.0.0.1/0.0.0.0/g" 50-server.cnf;
 if [ ! -d /var/lib/mysql/wordpress ]; then
