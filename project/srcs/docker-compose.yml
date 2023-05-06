@@ -1,0 +1,41 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    # depends_on:
+    #   - wordpress
+    ports:
+      - "443:443"
+    volumes:
+      - nginx_vol:/var/www/html
+      # - ssl:/etc/nginx/ssl
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - maria_vol:/var/lib/mysql
+    env_file:
+      - ./.env
+volumes:
+  nginx_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/Desktop/inception/project/srcs/volumes
+  maria_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/Desktop/inception/project/srcs/volumes
+  ssl:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/Desktop/inception/project/srcs/volumes
