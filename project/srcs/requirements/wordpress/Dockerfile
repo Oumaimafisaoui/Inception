@@ -15,14 +15,8 @@ RUN apt-get update && apt-get install -y php \
             php-redis \
             wget \
             unzip
-RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php/7.3/fpm/pool.d/www.conf
-WORKDIR /var/www/html
-RUN wget -q http://wordpress.org/latest.tar.gz && \
-    tar -xf latest.tar.gz --strip-components=1 && \
-    rm -f latest.tar.gz
-COPY ./conf/wp-config-create.sh  .
-RUN  chmod -R 0777 wp-content && sh wp-config-create.sh 
-EXPOSE 80
 
+COPY ./conf/wp-config-create.sh  .
+RUN  chmod -R 0777 wp-config-create.sh 
 # create aphp folder and give it root in var
-CMD ["/usr/sbin/php-fpm7.3", "-F"]
+ENTRYPOINT ["./wp-config-create.sh"]

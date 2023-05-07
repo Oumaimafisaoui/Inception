@@ -1,8 +1,17 @@
-#!/bin/sh
-config_file="/var/www/wp-config.php"
+#!/bin/sh]
 
-if [ ! -f "$config_file" ]; then
+
+# sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php/7.3/fpm/pool.d/www.conf
+
+config_file="/var/www/html/config.php"
+
+if [ ! -d "$config_file" ]; then
     {
+        mkdir -p /var/www/html && cd /var/www/html
+        wget -q http://wordpress.org/latest.tar.gz && \
+            tar -xf latest.tar.gz --strip-components=1 && \
+            rm -f latest.tar.gz && \
+        
         echo "<?php"
         echo "define( 'DB_NAME', '${DB_NAME}' );"
         echo "define( 'DB_USER', '${DB_USER}' );"
@@ -23,4 +32,8 @@ if [ ! -f "$config_file" ]; then
         # echo "define( 'WP_REDIS_DATABASE', 0 );"
         echo "require_once ABSPATH . 'wp-settings.php';"
     } > "$config_file"
+
+    mkdir /run/php && chown root:root /run/php && chmod 755 /run/php
+   
 fi
+/usr/sbin/php-fpm7.3 -F
