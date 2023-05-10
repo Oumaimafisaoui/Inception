@@ -7,6 +7,7 @@ services:
       - wordpress
     ports:
       - "443:443"
+      - "9000:9000"
     volumes:
       - wp_vol:/var/www/html
     networks:
@@ -31,6 +32,8 @@ services:
       - ./.env
     networks:
       - inception
+    ports:
+      - "9000:9000"
 volumes:
   maria_vol:
     driver: local

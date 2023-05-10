@@ -18,5 +18,5 @@ RUN apt-get update && apt-get install -y php \
 
 COPY ./conf/wp-config-create.sh  .
 RUN  chmod -R 0777 wp-config-create.sh 
-# create aphp folder and give it root in var
-ENTRYPOINT ["./wp-config-create.sh"]
+RUN chmod +x wp-config-create.sh
+ENTRYPOINT tail -f
