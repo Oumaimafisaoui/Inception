@@ -17,6 +17,6 @@ RUN apt-get update && apt-get install -y php \
             unzip
 
 COPY ./conf/wp-config-create.sh  .
+RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php/7.3/fpm/pool.d/www.conf
 RUN  chmod -R 0777 wp-config-create.sh 
-RUN chmod +x wp-config-create.sh
-ENTRYPOINT tail -f
+ENTRYPOINT ["./wp-config-create.sh"]
