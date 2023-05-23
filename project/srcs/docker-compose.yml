@@ -37,6 +37,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
+      # change the path to your folders
       device: $HOME/Desktop/inception/project/srcs/DB
   wp_vol:
     driver: local
