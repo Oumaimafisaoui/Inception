@@ -1,18 +1,18 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get install -y php \
-            php-fpm \
-            php-mysqli \
-            php-json \
-            php-curl \
-            php-dom \
-            php-exif \
-            php-fileinfo \
-            php-mbstring \
-            php-common \
-            php-xml \
-            php-zip \
-            php-redis \
+RUN apt-get update && apt-get install -y php7.3 \
+            php7.3-fpm \
+            php7.3-mysqli \
+            php7.3-json \
+            php7.3-curl \
+            php7.3-dom \
+            php7.3-exif \
+            php7.3-fileinfo \
+            php7.3-mbstring \
+            php7.3-common \
+            php7.3-xml \
+            php7.3-zip \
+            php7.3-redis \
             wget \
             unzip
 

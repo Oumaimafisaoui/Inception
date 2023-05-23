@@ -17,7 +17,7 @@ services:
     volumes:
       - maria_vol:/var/lib/mysql
     env_file:
-      - ./.env
+      - .env
     networks:
       - inception
   wordpress:
@@ -28,7 +28,7 @@ services:
     volumes:
       - wp_vol:/var/www/html
     env_file:
-      - ./.env
+      - .env
     networks:
       - inception
 volumes:
@@ -44,7 +44,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: $HOME/Desktop/inception/project/srcs/WordPress
+      device: $HOME/Desktop/inception/project/srcs/WP
 networks:
   inception:
     driver: bridge
