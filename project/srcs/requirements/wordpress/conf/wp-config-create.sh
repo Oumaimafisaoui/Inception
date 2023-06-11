@@ -1,8 +1,6 @@
 #!/bin/sh
 
 
-sed -i "s|listen = /run/php/php7.3-fpm.sock|listen = 9000|" "/etc/php/7.3/fpm/pool.d/www.conf"
-
 config_file="/var/www/html/wp-config.php"
 
 if [ ! -f "$config_file" ]; then
@@ -21,10 +19,11 @@ if [ ! -f "$config_file" ]; then
     sed -i "s/password_here/${DB_PASS}/g" wp-config.php
     sed -i "s/localhost/mariadb/g" wp-config.php
     
-    wp core install --url=https://localhost --title="Welcome to My Site" --admin_user=oum --admin_password=oumpass --admin_email=oum@example.com --allow-root 
+    wp core install --url=localhost --title="Welcome to My Site" --admin_user=oum --admin_password=oumpass --admin_email=oum@example.com --allow-root 
     wp theme install twentysixteen --activate --allow-root
     mkdir -p /run/php/
     chown root:root /run/php/ && chmod 775 /run/php/
+    sed -i "s|listen = /run/php/php7.3-fpm.sock|listen = 9000|" "/etc/php/7.3/fpm/pool.d/www.conf"
 fi
 
 exec "$@"
