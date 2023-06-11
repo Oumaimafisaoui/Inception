@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 config_file="/var/www/html/wp-config.php"
 
 if [ ! -f "$config_file" ]; then
@@ -19,7 +18,7 @@ if [ ! -f "$config_file" ]; then
     sed -i "s/password_here/${DB_PASS}/g" wp-config.php
     sed -i "s/localhost/mariadb/g" wp-config.php
     
-    wp core install --url=localhost --title="Welcome to My Site" --admin_user=oum --admin_password=oumpass --admin_email=oum@example.com --allow-root 
+    wp core install --url=localhost --title="Welcome to My Site" --admin_user=${AD_USER} --admin_password=${AD_PASS} --admin_email=${AD_EMAIL} --allow-root 
     wp theme install twentysixteen --activate --allow-root
     mkdir -p /run/php/
     chown root:root /run/php/ && chmod 775 /run/php/
